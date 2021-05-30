@@ -42,4 +42,11 @@ time.sleep(2)
 
 sele = Selector(text=wb.page_source)
 profiles = sele.xpath('//div/a[contains(@href, "https://in.linkedin.com")]/@href').getall()
-print(profiles)
+
+for profile in profiles :
+    wb.get(profile)
+    time.sleep(4)
+    sele = Selector(text=wb.page_source)
+    name = sele.xpath('//h1[contains(@class, "inline")]/text()').get()
+    jod_disc = sele.xpath('//div[contains(@class, "break-words")]/text()').get()
+    
