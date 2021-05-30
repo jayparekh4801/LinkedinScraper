@@ -2,7 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-
+from scrapy.selector import Selector
 # class LinkedinscraperSpider(scrapy.Spider):
 #     name = 'linkedinscraper'
 #     allowed_domains = ['linkedin.com/']
@@ -35,5 +35,11 @@ time.sleep(3)
 
 search_input = wb.find_element_by_xpath('//input[@type = "text"]')
 search_input.send_keys('site:linkedin.com/in/ AND "python developer" AND "india"')
+time.sleep(0.5)
+
 search_input.send_keys(Keys.RETURN)
-# wb.find_elements_by_xpath('//input[@name = "btnK"]')[1].click()
+time.sleep(2)
+
+sele = Selector(text=wb.page_source)
+profiles = sele.xpath('//div/a[contains(@href, "https://in.linkedin.com")]/@href').getall()
+print(profiles)
