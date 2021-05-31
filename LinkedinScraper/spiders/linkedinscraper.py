@@ -2,8 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from scrapy.selector import Selector
+import csv
 
 wb = webdriver.Chrome()
+writer = csv.writer(open("linkedinuserdata.csv", 'w'))
+writer.writerow(["name", "job_disc", "loc", "linkedin_url"])
 
 wb.get('https://www.linkedin.com/')
 time.sleep(3)
@@ -16,7 +19,7 @@ username.send_keys("example@gmail.com")
 time.sleep(0.5)
 
 password = wb.find_element_by_xpath('//input[@id = "password"]')
-password.send_keys("xxxxxxxxxx")
+password.send_keys("xxxxxxxxx")
 time.sleep(0.5)
 
 wb.find_element_by_xpath('//button[@type = "submit"]').click()
@@ -44,9 +47,5 @@ for profile in profiles :
     loc = sele.xpath('//div[@class = "pb2"]/span[1]/text()').get().strip()
     linkedin_url = wb.current_url
 
-    print({
-        "name" : name,
-        "job_disc" : job_disc,
-        "loc" : loc,
-        "linkedin_url" : linkedin_url
-    })
+    writer.writerow([name, job_disc, loc, linkedin_url])
+    
