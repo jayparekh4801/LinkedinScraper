@@ -20,11 +20,11 @@ wb.find_element_by_xpath('//a[text() = "Sign in"]').click()
 time.sleep(3)
 
 username = wb.find_element_by_xpath('//input[@id = "username"]')
-username.send_keys("example@gmail.com")
+username.send_keys("jayparekh0408@gmail.com")
 time.sleep(0.5)
 
 password = wb.find_element_by_xpath('//input[@id = "password"]')
-password.send_keys("xxxxxxxxx")
+password.send_keys("Jayparelh@01")
 time.sleep(0.5)
 
 wb.find_element_by_xpath('//button[@type = "submit"]').click()
@@ -47,6 +47,14 @@ for profile in profiles :
     wb.get(profile)
     time.sleep(4)
     sele = Selector(text=wb.page_source)
-    name = sele.xpath('//h1[contains(@class, "inline")]/text()').get()
-    jod_disc = sele.xpath('//div[contains(@class, "break-words")]/text()').get()
-    
+    name = sele.xpath('//h1[contains(@class, "inline")]/text()').get().strip()
+    job_disc = sele.xpath('//div[contains(@class, "break-words")]/text()').get().strip()
+    loc = sele.xpath('//div[@class = "pb2"]/span[1]/text()').get().strip()
+    linkedin_url = wb.current_url
+
+    print({
+        "name" : name,
+        "job_disc" : job_disc,
+        "loc" : loc,
+        "linkedin_url" : linkedin_url
+    })
