@@ -1,15 +1,7 @@
-# import scrapy
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from scrapy.selector import Selector
-# class LinkedinscraperSpider(scrapy.Spider):
-#     name = 'linkedinscraper'
-#     allowed_domains = ['linkedin.com/']
-#     start_urls = ['http://linkedin.com//']
-
-#     def parse(self, response):
-#         pass
 
 wb = webdriver.Chrome()
 
